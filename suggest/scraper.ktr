@@ -74,37 +74,42 @@
   <notepads>
   </notepads>
   <order>
-  <hop> <from>Data Grid</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Concat &#x22;request_key_right&#x22;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add &#x22;sub&#x22;</from><to>Cartesian Join 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Concat &#x22;request_key_right&#x22;</from><to>Concat &#x22;request_key_left&#x22;</to><enabled>Y</enabled> </hop>
   <hop> <from>Concat &#x22;request_key_left&#x22;</from><to>Row Normaliser</to><enabled>Y</enabled> </hop>
   <hop> <from>Row Normaliser</from><to>Filter &#x22;left useless&#x22;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Split</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split</from><to>Cartesian Join 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Split</from><to>Add constants</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants</from><to>Replace in string</to><enabled>Y</enabled> </hop>
   <hop> <from>Replace in string</from><to>Append streams</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>Append streams</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter &#x22;left useless&#x22;</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Append streams</from><to>Sort rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>CSV file input</from><to>String operations</to><enabled>Y</enabled> </hop>
-  <hop> <from>String operations</from><to>Sort by &#x22;keyword &#x2b; lang&#x22;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort by &#x22;keyword &#x2b; lang&#x22;</from><to>Split</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>build urls</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add &#x22;sore_const&#x22;</from><to>Calc &#x22;res_score&#x22;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calc &#x22;res_score&#x22;</from><to>Filter &#x22;keyword &#x3d; result&#x22;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Parse Result</from><to>Out &#x22;error&#x22;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Parse Results</from><to>Out &#x22;error&#x22;</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort by &#x22;result_kwd&#x22;</from><to>Group by &#x22;result_kwd&#x22;</to><enabled>Y</enabled> </hop>
   <hop> <from>Group by &#x22;result_kwd&#x22;</from><to>Sort by &#x22;score&#x22;</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort by &#x22;score&#x22;</from><to>Out &#x22;result&#x22;</to><enabled>Y</enabled> </hop>
   <hop> <from>Split 3</from><to>Out &#x22;raw_result&#x22;</to><enabled>Y</enabled> </hop>
   <hop> <from>HTTP Client</from><to>Split 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Split 2</from><to>Parse Result</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split 2</from><to>Parse Results</to><enabled>Y</enabled> </hop>
   <hop> <from>Split 2</from><to>Out &#x22;raw_request&#x22;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Parse Result</from><to>Split field to rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Split 3</from><to>Add &#x22;sore_const&#x22;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Parse Results</from><to>Split field to rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Split field to rows</from><to>Split 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter &#x22;keyword &#x3d; result&#x22;</from><to>Sort by &#x22;result_kwd&#x22;</to><enabled>Y</enabled> </hop>
-  <hop> <from>build urls</from><to>HTTP Client</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add &#x22;source&#x22;</from><to>Cartesian Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Append streams</from><to>Build URLs</to><enabled>Y</enabled> </hop>
+  <hop> <from>Cartesian Join 2</from><to>Concat &#x22;request_key_right&#x22;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Cartesian Join</from><to>Split</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split 3</from><to>Calc &#x22;res_score&#x22;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calc &#x22;res_score&#x22;</from><to>Filter &#x22;keyword &#x3d; result&#x22;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Build URLs</from><to>HTTP Client</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split 0</from><to>Filter &#x22; &#x22;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split 0</from><to>Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter &#x22; &#x22;</from><to>Replace &#x22; &#x22; -&#x3e; &#x2a;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Replace &#x22; &#x22; -&#x3e; &#x2a;</from><to>Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>IN &#x22;keywords&#x22;</from><to>String operations</to><enabled>Y</enabled> </hop>
+  <hop> <from>String operations</from><to>Sort by &#x22;keyword &#x2b; lang&#x22;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort by &#x22;keyword &#x2b; lang&#x22;</from><to>Split 0</to><enabled>Y</enabled> </hop>
+  <hop> <from>Join</from><to>Cartesian Join</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add &#x22;sore_const&#x22;</name>
@@ -133,8 +138,116 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>1954</yloc>
+      <xloc>371</xloc>
+      <yloc>2114</yloc>
+      <draw>N</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add &#x22;source&#x22;</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>source</name>
+        <type/>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line> <item>google</item> </line>
+      <line> <item>bing</item> </line>
+    </data>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>316</xloc>
+      <yloc>537</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add &#x22;sub&#x22;</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>sub</name>
+        <type/>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line> <item/> </line>
+      <line> <item>&#x2a;</item> </line>
+      <line> <item>a</item> </line>
+      <line> <item>b</item> </line>
+      <line> <item>c</item> </line>
+      <line> <item>d</item> </line>
+      <line> <item>e</item> </line>
+      <line> <item>f</item> </line>
+      <line> <item>g</item> </line>
+      <line> <item>h</item> </line>
+      <line> <item>i</item> </line>
+      <line> <item>j</item> </line>
+      <line> <item>k</item> </line>
+      <line> <item>l</item> </line>
+      <line> <item>m</item> </line>
+      <line> <item>n</item> </line>
+      <line> <item>o</item> </line>
+      <line> <item>p</item> </line>
+      <line> <item>q</item> </line>
+      <line> <item>r</item> </line>
+      <line> <item>s</item> </line>
+      <line> <item>t</item> </line>
+      <line> <item>u</item> </line>
+      <line> <item>v</item> </line>
+      <line> <item>w</item> </line>
+      <line> <item>x</item> </line>
+      <line> <item>y</item> </line>
+      <line> <item>z</item> </line>
+      <line> <item>0</item> </line>
+      <line> <item>1</item> </line>
+      <line> <item>2</item> </line>
+      <line> <item>3</item> </line>
+      <line> <item>4</item> </line>
+      <line> <item>5</item> </line>
+      <line> <item>6</item> </line>
+      <line> <item>7</item> </line>
+      <line> <item>8</item> </line>
+      <line> <item>9</item> </line>
+    </data>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>316</xloc>
+      <yloc>746</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -178,8 +291,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>75</xloc>
-      <yloc>357</yloc>
+      <xloc>79</xloc>
+      <yloc>678</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -199,14 +312,104 @@
 <tail_name>Select values</tail_name>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>1130</yloc>
+      <xloc>194</xloc>
+      <yloc>1378</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>CSV file input</name>
+    <name>Blocking Step</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <pass_all_rows>N</pass_all_rows>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>block</prefix>
+      <cache_size>5000</cache_size>
+      <compress>Y</compress>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>286</xloc>
+      <yloc>1517</yloc>
+      <draw>N</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Build URLs</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;build URLs&#xa;&#xa;&#x2f;&#x2f; first row - google&#xa;if&#x28;source &#x3d;&#x3d; &#x27;google&#x27;&#x29;&#x7b;&#xa;	var lang_parts &#x3d; lang.split&#x28;&#x27;-&#x27;&#x29;&#x3b;&#xa;	var tld        &#x3d; &#x27;com&#x27;&#x3b;&#xa;	var new_lang   &#x3d; lang_parts&#x5b;0&#x5d;&#x3b;&#xa;&#xa;	var url &#x3d; &#x22;http&#x3a;&#x2f;&#x2f;clients1.google.&#x22; &#x2b; tld &#x2b; &#x22;&#x2f;complete&#x2f;search&#x3f;q&#x3d;&#x22; &#x2b; encodeURI&#x28;request_key&#x29; &#x2b; &#x22;&#x26;hl&#x3d;&#x22; &#x2b; new_lang &#x2b; &#x22;&#x26;client&#x3d;hp&#x22;&#xa;&#x7d;&#xa;&#x2f;&#x2f;second row - bing&#xa;&#x2f;&#x2f; https&#x3a;&#x2f;&#x2f;msdn.microsoft.com&#x2f;en-us&#x2f;library&#x2f;ms533052&#x25;28v&#x3d;vs.85&#x25;29.aspx&#xa;else if &#x28;source &#x3d;&#x3d; &#x27;bing&#x27;&#x29;&#x7b;&#xa;	var url &#x3d; &#x22;http&#x3a;&#x2f;&#x2f;www.bing.com&#x2f;AS&#x2f;Suggestions&#x3f;pt&#x3d;page.home&#x26;mkt&#x3d;&#x22; &#x2b; lang &#x2b; &#x22;&#x26;qry&#x3d;&#x22; &#x2b; encodeURI&#x28;request_key&#x29; &#x2b; &#x22;&#x26;cp&#x3d;1&#x26;o&#x3d;hs&#x26;css&#x3d;1&#x26;cvid&#x3d;&#x22;&#xa;	var md5 &#x3d; Packages.org.apache.commons.codec.digest.DigestUtils.md5Hex&#x28;url&#x29;&#x3b;&#xa;	url &#x3d; url&#x2b;md5&#x3b;&#xa;&#x7d;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>url</name>
+        <rename>url</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>194</xloc>
+      <yloc>1472</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Build URLs &#x22;lang experiments&#x22;</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;build URLs&#xa;&#xa;&#x2f;&#x2f; first row - google&#xa;if&#x28;clone &#x3d;&#x3d; 0&#x29;&#x7b;&#xa;	var lang_parts &#x3d; lang.split&#x28;&#x27;-&#x27;&#x29;&#x3b;&#xa;	var tld&#x3b;&#xa;	var new_lang &#x3d; lang_parts&#x5b;0&#x5d;&#x3b;&#xa;&#xa;	switch&#x28;lang_parts&#x5b;1&#x5d;&#x29; &#x7b;&#xa;    	case &#x27;uk&#x27;&#x3a;&#xa;        	tld&#x3d;&#x27;co.uk&#x27;&#x3b;&#xa;        	break&#x3b;&#xa;    	case &#x27;au&#x27;&#x3a;&#xa;        	tld&#x3d;&#x27;com.au&#x27;&#x3b;&#xa;        	break&#x3b;&#xa;    	case &#x27;in&#x27;&#x3a;&#xa;        	tld&#x3d;&#x27;co.in&#x27;&#x3b;&#xa;        	break&#x3b;&#xa;    	case &#x27;pk&#x27;&#x3a;&#xa;        	tld&#x3d;&#x27;com.pk&#x27;&#x3b;&#xa;        	break&#x3b;&#xa;    	case &#x27;tr&#x27;&#x3a;&#xa;        	tld&#x3d;&#x27;com.tr&#x27;&#x3b;&#xa;        	break&#x3b;&#xa;    	case &#x27;br&#x27;&#x3a;&#xa;        	tld&#x3d;&#x27;com.br&#x27;&#x3b;&#xa;        	break&#x3b;&#xa;    	default&#x3a;&#xa;        	default&#x3a;&#xa;        	tld&#x3d;&#x27;com&#x27;&#x3b;&#xa;	&#x7d;&#xa;&#xa;	var url &#x3d; &#x22;http&#x3a;&#x2f;&#x2f;clients1.google.&#x22; &#x2b; tld &#x2b; &#x22;&#x2f;complete&#x2f;search&#x3f;q&#x3d;&#x22; &#x2b; encodeURI&#x28;request_key&#x29; &#x2b; &#x22;&#x26;hl&#x3d;&#x22; &#x2b; lang &#x2b; &#x22;&#x26;client&#x3d;hp&#x22;&#xa;	var type &#x3d; &#x22;google&#x22;&#x3b;&#xa;&#x7d;&#xa;&#x2f;&#x2f;second row - bing&#xa;else if &#x28;clone &#x3d;&#x3d; 1&#x29;&#x7b;&#xa;	var url &#x3d; &#x22;http&#x3a;&#x2f;&#x2f;www.bing.com&#x2f;AS&#x2f;Suggestions&#x3f;pt&#x3d;page.home&#x26;mkt&#x3d;&#x22; &#x2b; lang &#x2b; &#x22;&#x26;qry&#x3d;&#x22; &#x2b; encodeURI&#x28;request_key&#x29; &#x2b; &#x22;&#x26;cp&#x3d;1&#x26;o&#x3d;hs&#x26;css&#x3d;1&#x26;cvid&#x3d;&#x22;&#xa;	var md5 &#x3d; Packages.org.apache.commons.codec.digest.DigestUtils.md5Hex&#x28;url&#x29;&#x3b;&#xa;	url &#x3d; url&#x2b;md5&#x3b;&#xa;	var type &#x3d; &#x22;bing&#x22;&#x3b;&#xa;&#x7d;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>url</name>
+        <rename>url</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>type</name>
+        <rename>type</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>378</xloc>
+      <yloc>1451</yloc>
+      <draw>N</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>IN &#x22;keywords&#x22;</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -255,14 +458,91 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>28</yloc>
+      <xloc>194</xloc>
+      <yloc>21</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
     <name>Calc &#x22;res_score&#x22;</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#xa;var sore_const &#x3d; 11.0&#x3b;&#xa;var res_score&#x3b;&#xa;&#xa;if &#x28;source &#x3d;&#x3d; &#x27;google&#x27;&#x29;&#x7b;&#xa;	res_score &#x3d; sore_const - res_pos&#x3b;&#xa;&#x7d;&#xa;else if &#x28;source &#x3d;&#x3d; &#x27;bing&#x27;&#x29;&#x7b;&#xa;	res_score &#x3d; &#x28;sore_const - res_pos&#x29;&#x2a;0.1&#x3b;&#xa;&#x7d;&#xa;&#xa;&#x2f;&#x2a;&#xa;var r       &#x3d; res_score&#x3b;&#xa;var stellen &#x3d; 100&#x3b;&#xa;&#xa;r &#x3d; r &#x2a; Math.pow&#x28;10,stellen&#x29;&#x3b;&#xa;r &#x3d; Math.round&#x28;r&#x29;&#x3b;&#xa;r &#x3d; r &#x2f; Math.pow&#x28;10,stellen&#x29;&#x3b;&#xa;&#xa;res_score &#x3d; r&#x3b;&#xa;&#x2a;&#x2f;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>res_score</name>
+        <rename>res_score</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>3</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>194</xloc>
+      <yloc>2085</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calc &#x22;res_score&#x22; &#x2b; HTML decode KWD 2</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>res_score</field_name>
+<calc_type>SUBTRACT</calc_type>
+<field_a>sore_const</field_a>
+<field_b>res_pos</field_b>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>new_kwd</field_name>
+<calc_type>UNESCAPE_HTML</calc_type>
+<field_a>result_kwd</field_a>
+<field_b/>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>433</xloc>
+      <yloc>2149</yloc>
+      <draw>N</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calc &#x22;res_score&#x22;_</name>
     <type>Calculator</type>
     <description/>
     <distribute>Y</distribute>
@@ -288,8 +568,70 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>2044</yloc>
+      <xloc>364</xloc>
+      <yloc>2207</yloc>
+      <draw>N</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Cartesian Join</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>194</xloc>
+      <yloc>537</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Cartesian Join 2</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main>IN &#x22;keywords&#x22;</main>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>194</xloc>
+      <yloc>746</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -369,8 +711,8 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>712</yloc>
+      <xloc>194</xloc>
+      <yloc>960</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -450,80 +792,8 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>618</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Data Grid</name>
-    <type>DataGrid</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>sub</name>
-        <type/>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <data>
-      <line> <item/> </line>
-      <line> <item>&#x2a;</item> </line>
-      <line> <item>a</item> </line>
-      <line> <item>b</item> </line>
-      <line> <item>c</item> </line>
-      <line> <item>d</item> </line>
-      <line> <item>e</item> </line>
-      <line> <item>f</item> </line>
-      <line> <item>g</item> </line>
-      <line> <item>h</item> </line>
-      <line> <item>i</item> </line>
-      <line> <item>j</item> </line>
-      <line> <item>k</item> </line>
-      <line> <item>l</item> </line>
-      <line> <item>m</item> </line>
-      <line> <item>n</item> </line>
-      <line> <item>o</item> </line>
-      <line> <item>p</item> </line>
-      <line> <item>q</item> </line>
-      <line> <item>r</item> </line>
-      <line> <item>s</item> </line>
-      <line> <item>t</item> </line>
-      <line> <item>u</item> </line>
-      <line> <item>v</item> </line>
-      <line> <item>w</item> </line>
-      <line> <item>x</item> </line>
-      <line> <item>y</item> </line>
-      <line> <item>z</item> </line>
-      <line> <item>0</item> </line>
-      <line> <item>1</item> </line>
-      <line> <item>2</item> </line>
-      <line> <item>3</item> </line>
-      <line> <item>4</item> </line>
-      <line> <item>5</item> </line>
-      <line> <item>6</item> </line>
-      <line> <item>7</item> </line>
-      <line> <item>8</item> </line>
-      <line> <item>9</item> </line>
-    </data>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>306</xloc>
-      <yloc>431</yloc>
+      <xloc>194</xloc>
+      <yloc>858</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -563,8 +833,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>2136</yloc>
+      <xloc>194</xloc>
+      <yloc>2192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -604,8 +874,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>890</yloc>
+      <xloc>194</xloc>
+      <yloc>1138</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -665,11 +935,17 @@
           <type>FIRST</type>
           <valuefield/>
         </field>
+        <field>
+          <aggregate>src_cnt</aggregate>
+          <subject>source</subject>
+          <type>COUNT_DISTINCT</type>
+          <valuefield/>
+        </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>2325</yloc>
+      <xloc>194</xloc>
+      <yloc>2381</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -705,39 +981,8 @@
     </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>1405</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Join Rows &#x28;cartesian product&#x29;</name>
-    <type>JoinRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>out</prefix>
-      <cache_size>500</cache_size>
-      <main>CSV file input</main>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue/>
- <function>&#x3d;</function>
- <rightvalue/>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>524</yloc>
+      <xloc>194</xloc>
+      <yloc>1559</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -869,11 +1114,23 @@
         <length>-1</length>
         <precision>0</precision>
       </field>
+      <field>
+        <name>source</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>75</xloc>
-      <yloc>1667</yloc>
+      <xloc>85</xloc>
+      <yloc>1822</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -897,7 +1154,7 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -906,7 +1163,7 @@
       <name>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;log&#x2f;raw_request</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
       <extention>csv</extention>
       <append>N</append>
       <split>N</split>
@@ -1005,11 +1262,23 @@
         <length>-1</length>
         <precision>0</precision>
       </field>
+      <field>
+        <name>source</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>310</xloc>
-      <yloc>1493</yloc>
+      <xloc>314</xloc>
+      <yloc>1646</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1177,11 +1446,23 @@
         <length>10</length>
         <precision>0</precision>
       </field>
+      <field>
+        <name>source</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>310</xloc>
-      <yloc>1828</yloc>
+      <xloc>314</xloc>
+      <yloc>1996</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1214,7 +1495,7 @@
       <name>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;out&#x2f;result_</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
       <extention>csv</extention>
       <append>N</append>
       <split>N</split>
@@ -1291,6 +1572,18 @@
       </field>
       <field>
         <name>score</name>
+        <type>Number</type>
+        <format>&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>3</precision>
+      </field>
+      <field>
+        <name>src_cnt</name>
         <type>Integer</type>
         <format>&#x23;</format>
         <currency/>
@@ -1299,19 +1592,19 @@
         <nullif/>
         <trim_type>none</trim_type>
         <length>-1</length>
-        <precision>0</precision>
+        <precision>-1</precision>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>2510</yloc>
+      <xloc>194</xloc>
+      <yloc>2566</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Parse Result</name>
+    <name>Parse Results</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -1325,7 +1618,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var in_str       &#x3d; http_result.match&#x28;&#x2f;&#x5e;&#x5b;&#x5e;&#x5c;&#x28;&#x5c;&#x29;&#x5d;&#x2a;&#x5c;&#x28;&#x28;.&#x2a;&#x29;&#x5c;&#x29;&#x24;&#x2f;&#x29;&#x3b;            &#x2f;&#x2f;prepare google string to parse embeded json&#xa;var google_array &#x3d; eval&#x28;&#x22;&#x28;function&#x28;&#x29;&#x7b;return &#x22; &#x2b; in_str&#x5b;1&#x5d; &#x2b; &#x22;&#x3b;&#x7d;&#x29;&#x28;&#x29;&#x22;&#x29;&#x3b;  &#x2f;&#x2f;parse json to array&#xa;var out_arr &#x3d; &#x5b;&#x5d;&#x3b;&#xa;&#xa;&#x2f;&#x2f;this loop is not perfect as it relies on response object never changing&#xa;for&#x28;var i &#x3d; 0&#x3b; i &#x3c; google_array&#x5b;1&#x5d;.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b; &#x2f;&#x2f;loop through the json-array elements&#xa;	var tmp_str&#x3b;&#xa;	var tmp_parts&#x3b;&#xa;&#xa;	tmp_str   &#x3d; google_array&#x5b;1&#x5d;&#x5b;i&#x5d;.toString&#x28;&#x29;&#x3b; &#x2f;&#x2f;convert object and variable sub parts to string&#xa;	tmp_parts &#x3d; tmp_str.split&#x28;&#x27;,&#x27;&#x29;&#x3b;            &#x2f;&#x2f;split string to get only the fix first part with raw suggest keyword&#xa;	tmp_str   &#x3d; tmp_parts&#x5b;0&#x5d;&#x3b;&#xa;&#xa;	tmp_str   &#x3d; unEscapeHtml&#x28;tmp_str&#x29;&#x3b;         &#x2f;&#x2f;convert HTML encodet chars&#xa;	tmp_str   &#x3d; tmp_str.replace&#x28;&#x2f;&#x3c;b&#x3e;&#x2f;g,&#x27;&#x27;&#x29;&#x3b;    &#x2f;&#x2f;remove beginning bold tags&#xa;	tmp_str   &#x3d; tmp_str.replace&#x28;&#x2f;&#x3c;&#x5c;&#x2f;b&#x3e;&#x2f;g,&#x27;&#x27;&#x29;&#x3b;  &#x2f;&#x2f;remove ending bold tags&#xa;&#xa;	out_arr.push&#x28;tmp_str&#x29;&#x3b;                     &#x2f;&#x2f;push cleand suggest string to output array&#xa;&#x7d; &#xa;&#xa;var out_str &#x3d; out_arr.join&#x28;&#x27;&#x7c;&#x27;&#x29;&#x3b; &#x2f;&#x2f;implode out array to pipe-sepparated string instead of &#x22;producing&#x22; new lines in java script step</jsScript_script>
+        <jsScript_script>&#xa;&#x2f;&#x2f; parse google results&#xa;if &#x28;source &#x3d;&#x3d; &#x27;google&#x27;&#x29;&#x7b;&#xa;&#xa;	var out_arr &#x3d; &#x5b;&#x5d;&#x3b;&#xa;&#xa;	var in_str       &#x3d; http_result.match&#x28;&#x2f;&#x5e;&#x5b;&#x5e;&#x5c;&#x28;&#x5c;&#x29;&#x5d;&#x2a;&#x5c;&#x28;&#x28;.&#x2a;&#x29;&#x5c;&#x29;&#x24;&#x2f;&#x29;&#x3b;            &#x2f;&#x2f;prepare google string to parse embeded json&#xa;	var google_array &#x3d; eval&#x28;&#x22;&#x28;function&#x28;&#x29;&#x7b;return &#x22; &#x2b; in_str&#x5b;1&#x5d; &#x2b; &#x22;&#x3b;&#x7d;&#x29;&#x28;&#x29;&#x22;&#x29;&#x3b;  &#x2f;&#x2f;parse json to array&#xa;&#xa;	&#x2f;&#x2f;this loop is not perfect as it relies on response object never changing&#xa;	for&#x28;var i &#x3d; 0&#x3b; i &#x3c; google_array&#x5b;1&#x5d;.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b; &#x2f;&#x2f;loop through the json-array elements&#xa;		var tmp_str&#x3b;&#xa;		var tmp_parts&#x3b;&#xa;&#xa;		tmp_str   &#x3d; google_array&#x5b;1&#x5d;&#x5b;i&#x5d;.toString&#x28;&#x29;&#x3b; &#x2f;&#x2f;convert object and variable sub parts to string&#xa;		tmp_parts &#x3d; tmp_str.split&#x28;&#x27;,&#x27;&#x29;&#x3b;            &#x2f;&#x2f;split string to get only the fix first part with raw suggest keyword&#xa;		tmp_str   &#x3d; tmp_parts&#x5b;0&#x5d;&#x3b;&#xa;&#xa;		tmp_str   &#x3d; unEscapeHtml&#x28;tmp_str&#x29;&#x3b;         &#x2f;&#x2f;convert HTML encodet chars&#xa;		tmp_str   &#x3d; tmp_str.replace&#x28;&#x2f;&#x3c;b&#x3e;&#x2f;g,&#x27;&#x27;&#x29;&#x3b;    &#x2f;&#x2f;remove beginning bold tags&#xa;		tmp_str   &#x3d; tmp_str.replace&#x28;&#x2f;&#x3c;&#x5c;&#x2f;b&#x3e;&#x2f;g,&#x27;&#x27;&#x29;&#x3b;  &#x2f;&#x2f;remove ending bold tags&#xa;&#xa;		out_arr.push&#x28;tmp_str&#x29;&#x3b;                     &#x2f;&#x2f;push cleand suggest string to output array&#xa;	&#x7d;&#xa;&#xa;	var out_str &#x3d; out_arr.join&#x28;&#x27;&#x7c;&#x27;&#x29;&#x3b; &#x2f;&#x2f;implode out array to pipe-sepparated string instead of &#x22;producing&#x22; new lines in java script step&#xa;&#xa;&#x7d;&#xa;&#xa;&#x2f;&#x2f; parse bing results&#xa;else if &#x28;source &#x3d;&#x3d; &#x27;bing&#x27;&#x29;&#x7b;&#xa;&#xa;	var out_str &#x3d; &#x27;&#x27;&#x3b; &#x2f;&#x2f; early defining the result string so if the NoResults-patern matches we get an empty result string&#xa;&#xa;	&#x2f;&#x2f;NoResults - check&#xa;	var patt &#x3d; &#x2f;&#x5e;NoResults.&#x2a;&#x24;&#x2f;g&#x3b;&#xa;	if&#x28;patt.test&#x28;http_result&#x29; &#x3d;&#x3d; false&#x29;&#x7b;&#xa;&#xa;		var out_arr &#x3d; &#x5b;&#x5d;&#x3b;&#xa;		var match_patt &#x3d; &#x2f;query&#x3d;&#x22;&#x28;&#x5b;&#x5e;&#x22;&#x5d;&#x2a;&#x29;&#x22; nav&#x3d;&#x2f;gi&#x3b;     &#x2f;&#x2f;match the sugest results with captchure group&#xa;		var match_arr  &#x3d; match_patt.exec&#x28;http_result&#x29;&#x3b;&#xa;&#xa;		for&#x28;var i &#x3d; 0&#x3b; i &#x3c; match_arr.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b; &#x2f;&#x2f;loop through the captchures &#xa;			out_arr.push&#x28;match_arr&#x5b;1&#x5d;.toString&#x28;&#x29;&#x29;&#x3b;  &#x2f;&#x2f;push suggest string to output array&#xa;		&#x7d;&#xa;&#xa;		out_str        &#x3d; out_arr.join&#x28;&#x27;&#x7c;&#x27;&#x29;&#x3b;   &#x2f;&#x2f;implode out array to pipe-sepparated string instead of &#x22;producing&#x22; new lines in java script step&#xa;	&#x7d;&#xa;&#x7d;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>out_str</name>
         <rename>data_str</rename>
         <type>String</type>
@@ -1334,8 +1627,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>1606</yloc>
+      <xloc>194</xloc>
+      <yloc>1763</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1379,8 +1672,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>1597</yloc>
+      <xloc>194</xloc>
+      <yloc>1765</yloc>
       <draw>N</draw>
       </GUI>
     </step>
@@ -1422,8 +1715,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>380</xloc>
-      <yloc>2219</yloc>
+      <xloc>384</xloc>
+      <yloc>2387</yloc>
       <draw>N</draw>
       </GUI>
     </step>
@@ -1454,8 +1747,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>75</xloc>
-      <yloc>1046</yloc>
+      <xloc>79</xloc>
+      <yloc>1294</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1480,8 +1773,8 @@
         <norm>request_key</norm>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>802</yloc>
+      <xloc>194</xloc>
+      <yloc>1050</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1497,12 +1790,12 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <linesrange>1</linesrange>
+    <linesrange>1..40</linesrange>
     <linenumfield/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>310</xloc>
-      <yloc>1360</yloc>
+      <xloc>299</xloc>
+      <yloc>1508</yloc>
       <draw>N</draw>
       </GUI>
     </step>
@@ -1518,7 +1811,11 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>keyword</name>
+    <fields>      <field>        <name>source</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>keyword</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -1537,8 +1834,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>983</yloc>
+      <xloc>194</xloc>
+      <yloc>1231</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1572,43 +1869,9 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>2108</yloc>
+      <xloc>194</xloc>
+      <yloc>2164</yloc>
       <draw>N</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Sort by &#x22;score&#x22;</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>score</name>
-        <ascending>N</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>2420</yloc>
-      <draw>Y</draw>
       </GUI>
     </step>
 
@@ -1646,8 +1909,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>202</yloc>
+      <xloc>194</xloc>
+      <yloc>194</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1680,8 +1943,42 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>2233</yloc>
+      <xloc>194</xloc>
+      <yloc>2289</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort by &#x22;score&#x22;</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>Y</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>score</name>
+        <ascending>N</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>194</xloc>
+      <yloc>2476</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1726,9 +2023,9 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>1231</yloc>
-      <draw>Y</draw>
+      <xloc>347</xloc>
+      <yloc>1460</yloc>
+      <draw>N</draw>
       </GUI>
     </step>
 
@@ -1745,8 +2042,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>293</yloc>
+      <xloc>194</xloc>
+      <yloc>622</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1764,8 +2061,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>1493</yloc>
+      <xloc>194</xloc>
+      <yloc>1646</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1783,8 +2080,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>1828</yloc>
+      <xloc>194</xloc>
+      <yloc>1996</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1829,8 +2126,8 @@
         <trimtype>both</trimtype>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>310</xloc>
-      <yloc>1790</yloc>
+      <xloc>314</xloc>
+      <yloc>1958</yloc>
       <draw>N</draw>
       </GUI>
     </step>
@@ -1855,8 +2152,8 @@
    <delimiter_is_regex>N</delimiter_is_regex>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>1728</yloc>
+      <xloc>194</xloc>
+      <yloc>1896</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1902,15 +2199,15 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>114</yloc>
+      <xloc>194</xloc>
+      <yloc>107</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>build urls</name>
-    <type>ScriptValueMod</type>
+    <name>Filter &#x22; &#x22;</name>
+    <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1919,75 +2216,97 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#xa;var url &#x3d; &#x22;http&#x3a;&#x2f;&#x2f;clients1.google.com&#x2f;complete&#x2f;search&#x3f;q&#x3d;&#x22; &#x2b; encodeURI&#x28;request_key&#x29; &#x2b; &#x22;&#x26;hl&#x3d;&#x22; &#x2b; encodeURI&#x28;lang&#x29; &#x2b; &#x22;&#x26;client&#x3d;hp&#x22;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>url</name>
-        <rename>url</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
-      <yloc>1319</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Calc &#x22;res_score&#x22; &#x2b; HTML decode KWD 2</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <calculation><field_name>res_score</field_name>
-<calc_type>SUBTRACT</calc_type>
-<field_a>sore_const</field_a>
-<field_b>res_pos</field_b>
-<field_c/>
-<value_type>Integer</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-       <calculation><field_name>new_kwd</field_name>
-<calc_type>UNESCAPE_HTML</calc_type>
-<field_a>result_kwd</field_a>
-<field_b/>
-<field_c/>
-<value_type>String</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
+<send_true_to/>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>keyword</leftvalue>
+ <function>CONTAINS</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text> </text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>429</xloc>
-      <yloc>1981</yloc>
-      <draw>N</draw>
+      <xloc>316</xloc>
+      <yloc>333</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Split 0</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>194</xloc>
+      <yloc>282</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Join</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>194</xloc>
+      <yloc>452</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Replace &#x22; &#x22; -&#x3e; &#x2a;</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>keyword</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string> </replace_string>
+        <replace_by_string> &#x2a; </replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>316</xloc>
+      <yloc>398</yloc>
+      <draw>Y</draw>
       </GUI>
     </step>
 
   <step_error_handling>
       <error>
-        <source_step>Parse Result</source_step>
+        <source_step>Parse Results</source_step>
         <target_step>Out &#x22;error&#x22;</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
